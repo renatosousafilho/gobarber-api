@@ -16,6 +16,12 @@ class UserController {
             provider,
         });
     }
+
+    async update(req, res) {
+        const user = await User.findByPk(req.userId)
+
+        return res.json(user)
+    }
 }
 
 export default new UserController();
