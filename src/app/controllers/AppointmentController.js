@@ -47,7 +47,6 @@ class AppointmentController {
         const { provider_id, date } = req.body;
 
         // check if provider_id is from valid provider
-
         const isProvider = await User.findOne({
             where: { id: provider_id, provider: true }
         })
@@ -55,6 +54,8 @@ class AppointmentController {
         if (!isProvider) {
             return res.status(400).json({error: 'You can only create appointments with providers'});
         }
+
+        // check if user is different from provider
 
         // check for past dates
         const hourStart = startOfHour(parseISO(date));
